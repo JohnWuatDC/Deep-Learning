@@ -29,10 +29,10 @@ You will find all the useful websites you needed for learning caffe and you need
 We need to install these 2 packages
 
 ```
-sudo pip install opencv-python
+sudo pip2 install opencv-python
 ```
 ```
-sudo pip install lmdb
+sudo pip2 install lmdb
 
 ```
 
