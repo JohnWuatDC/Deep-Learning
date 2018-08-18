@@ -65,7 +65,7 @@ for epoch in range(num_epochs):
 
         if (i + 1) % 100 == 0:
             print('Epoch [%d/%d], Iter [%d/%d] Loss: %.4f'
-                  % (epoch + 1, num_epochs, i + 1, len(train_dataset) // batch_size, loss.data[0]))
+                  % (epoch + 1, num_epochs, i + 1, len(train_dataset) // batch_size, loss.item()))
 # -----------------------------------------------------------------------------------
 # Test the Model
 cnn.eval()  # Change model to 'eval' mode (BN uses moving mean/var).
