@@ -16,7 +16,7 @@ x, y = Variable(x), Variable(y)
 # test data
 test_x = torch.unsqueeze(torch.linspace(-1, 1, N_SAMPLES), 1)
 test_y = test_x + 0.3*torch.normal(torch.zeros(N_SAMPLES, 1), torch.ones(N_SAMPLES, 1))
-test_x, test_y = Variable(test_x, volatile=True), Variable(test_y, volatile=True)
+test_x, test_y = Variable(test_x), Variable(test_y)
 # ----------------------------------------------------------------------------------------------
 # show data
 plt.scatter(x.data.numpy(), y.data.numpy(), c='magenta', s=50, alpha=0.5, label='train')
@@ -78,8 +78,8 @@ for t in range(500):
         plt.scatter(test_x.data.numpy(), test_y.data.numpy(), c='cyan', s=50, alpha=0.3, label='test')
         plt.plot(test_x.data.numpy(), test_pred_ofit.data.numpy(), 'r-', lw=3, label='overfitting')
         plt.plot(test_x.data.numpy(), test_pred_drop.data.numpy(), 'b--', lw=3, label='dropout(50%)')
-        plt.text(0, -1.2, 'overfitting loss=%.4f' % loss_func(test_pred_ofit, test_y).data[0], fontdict={'size': 20, 'color':  'red'})
-        plt.text(0, -1.5, 'dropout loss=%.4f' % loss_func(test_pred_drop, test_y).data[0], fontdict={'size': 20, 'color': 'blue'})
+        plt.text(0, -1.2, 'overfitting loss=%.4f' % loss_func(test_pred_ofit, test_y).item(), fontdict={'size': 20, 'color':  'red'})
+        plt.text(0, -1.5, 'dropout loss=%.4f' % loss_func(test_pred_drop, test_y).item(), fontdict={'size': 20, 'color': 'blue'})
         plt.legend(loc='upper left'); plt.ylim((-2.5, 2.5));plt.pause(0.1)
 
         # change back to train mode
