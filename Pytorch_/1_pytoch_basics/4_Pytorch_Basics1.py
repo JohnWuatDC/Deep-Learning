@@ -39,7 +39,7 @@ pred = linear(p)
 
 # Compute loss.
 performance_index = criterion(pred, y)
-print('loss: ', performance_index.data[0])
+print('loss: ', performance_index.item())
 
 # Backpropagation.
 performance_index.backward()
@@ -55,4 +55,4 @@ optimizer.step()
 # Print out the loss after optimization.
 pred = linear(p)
 loss = criterion(pred, y)
-print('loss after 1 step optimization: ', loss.data[0])
+print('loss after 1 step optimization: ', loss.item())
