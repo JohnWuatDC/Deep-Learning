@@ -11,11 +11,9 @@ import torchvision.transforms as transforms
 torch.manual_seed(1122)
 
 trainset = torchvision.datasets.MNIST(root='./mnist', train=True, download=True, transform=transforms.ToTensor())
-
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=250, shuffle=True)
 # --------------------------------------------------------------------------------------------
 testset = torchvision.datasets.MNIST(root='./mnist', train=False, download=True, transform=transforms.ToTensor())
-
 testloader = torch.utils.data.DataLoader(testset, batch_size=250, shuffle=True)
 # --------------------------------------------------------------------------------------------
 
@@ -26,7 +24,7 @@ class MLP(nn.Module):
         self.l1 = nn.Linear(1 * 28 * 28, 20)
         self.t1 = nn.Tanh()
         self.l2 = nn.Linear(20, 10)
-        self.t2 = nn.LogSoftmax()
+        self.t2 = nn.LogSoftmax(dim=1)
 
     def forward(self, x):
         x = x.view(-1, 1 * 28 * 28)
@@ -52,7 +50,7 @@ def trainEpoch(dataloader, epoch):
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
-        running_loss += loss.data[0]
+        running_loss += loss.item()
         if (i + 1) % 50 == 0:
             print('[%d, %5d] loss: %.3f' %
                   (epoch + 1, i + 1, running_loss / 50))
@@ -60,7 +58,7 @@ def trainEpoch(dataloader, epoch):
 # --------------------------------------------------------------------------------------------
 
 # define a testing function
-def testModel(dataloader):
+def Model_test(dataloader):
     mlp.eval()
     test_loss = 0
     correct = 0
@@ -80,4 +78,4 @@ def testModel(dataloader):
 for epoch in range(30):
     trainEpoch(trainloader, epoch)
 
-testModel(testloader)
+Model_test(testloader)

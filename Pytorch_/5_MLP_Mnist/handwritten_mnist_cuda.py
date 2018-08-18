@@ -3,25 +3,23 @@ import torch.nn as nn
 import torchvision.datasets as dsets
 import torchvision.transforms as transforms
 from torch.autograd import Variable
-
-
-# Hyper Parameters 
+# --------------------------------------------------------------------------------------------
+# Hyper Parameters
 input_size = 784
 hidden_size = 500
 num_classes = 10
 num_epochs = 5
 batch_size = 100
 learning_rate = 0.001
-
-# MNIST Dataset 
+# --------------------------------------------------------------------------------------------
+# MNIST Dataset
 train_dataset = dsets.MNIST(root='./data', train=True,transform=transforms.ToTensor(), download=True)
-
 test_dataset = dsets.MNIST(root='./data', train=False, transform=transforms.ToTensor())
 
 # Data Loader (Input Pipeline)
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
-
 test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
+# --------------------------------------------------------------------------------------------
 
 # Neural Network Model (1 hidden layer)
 class Net(nn.Module):
@@ -36,14 +34,14 @@ class Net(nn.Module):
         out = self.relu(out)
         out = self.fc2(out)
         return out
-    
+# --------------------------------------------------------------------------------------------
 net = Net(input_size, hidden_size, num_classes)
 net.cuda()   
-    
+# --------------------------------------------------------------------------------------------
 # Loss and Optimizer
 criterion = nn.CrossEntropyLoss()  
 optimizer = torch.optim.Adam(net.parameters(), lr=learning_rate)  
-
+# --------------------------------------------------------------------------------------------
 # Train the Model
 for epoch in range(num_epochs):
     for i, (images, labels) in enumerate(train_loader):  
@@ -60,8 +58,8 @@ for epoch in range(num_epochs):
         
         if (i+1) % 100 == 0:
             print ('Epoch [%d/%d], Step [%d/%d], Loss: %.4f' 
-                   %(epoch+1, num_epochs, i+1, len(train_dataset)//batch_size, loss.data[0]))
-
+                   %(epoch+1, num_epochs, i+1, len(train_dataset)//batch_size, loss.item()))
+# --------------------------------------------------------------------------------------------
 # Test the Model
 correct = 0
 total = 0
@@ -73,6 +71,6 @@ for images, labels in test_loader:
     correct += (predicted.cpu() == labels).sum()
 
 print('Accuracy of the network on the 10000 test images: %d %%' % (100 * correct / total))
-
+# --------------------------------------------------------------------------------------------
 # Save the Model
 torch.save(net.state_dict(), 'model.pkl')

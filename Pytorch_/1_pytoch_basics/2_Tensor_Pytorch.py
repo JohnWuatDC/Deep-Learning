@@ -1,19 +1,21 @@
 import torch
 #----------------------------------------------------------------------------
-dtype = torch.FloatTensor
-# dtype = torch.cuda.FloatTensor # Uncomment this to run on GPU
+dtype = torch.float
+if torch.cuda.is_available():
+    device = torch.device("cuda:0")
+else:
+    device = torch.device("cpu")
 #----------------------------------------------------------------------------
 Batch_size = 64     # Batch size
 Q = 1000            # Input size
 S = 100             # Number of neurons
 a = 10              # Network output size
 #----------------------------------------------------------------------------
-p = torch.randn(Batch_size, Q).type(dtype)
-t = torch.randn(Batch_size, a).type(dtype)
+p = torch.randn(Batch_size, Q, device=device, dtype=dtype)
+t = torch.randn(Batch_size, a, device=device, dtype=dtype)
 #----------------------------------------------------------------------------
-w1 = torch.randn(Q, S).type(dtype)
-w2 = torch.randn(S, a).type(dtype)
-
+w1 = torch.randn(Q, S, device=device, dtype=dtype)
+w2 = torch.randn(S, a, device=device, dtype=dtype)
 learning_rate = 1e-6
 #----------------------------------------------------------------------------
 for t in range(500):
