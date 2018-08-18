@@ -2,10 +2,10 @@
 import torch
 from torch import nn
 from torchviz import make_dot, make_dot_from_trace
-
+import webbrowser
+#----------------------------------------------------------------------------
 # sudo pip3 install graphviz
 # sudo pip3 install git+https://github.com/szagoruyko/pytorchviz
-
 #----------------------------------------------------------------------------
 Batch_size = 64     # Batch size
 R = 1000            # Input size
@@ -19,4 +19,9 @@ model.add_module('W1', nn.Linear(16, 1))
 
 x = torch.randn(1,8)
 
-make_dot(model(x), params=dict(model.named_parameters()))
+a =make_dot(model(x), params=dict(model.named_parameters()))
+
+print(a.source)
+b =a.render('graph')
+webbrowser.open_new(r'/home/ajafari/Deep-Learning/graph.pdf')
+
