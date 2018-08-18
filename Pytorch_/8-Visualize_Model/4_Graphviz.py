@@ -4,6 +4,8 @@ from torch import nn
 from torchviz import make_dot, make_dot_from_trace
 import webbrowser
 #----------------------------------------------------------------------------
+#https://github.com/szagoruyko/pytorchviz/blob/master/examples.ipynb
+#----------------------------------------------------------------------------
 # sudo pip3 install graphviz
 # sudo pip3 install git+https://github.com/szagoruyko/pytorchviz
 #----------------------------------------------------------------------------
@@ -25,3 +27,9 @@ print(a.source)
 b =a.render('graph')
 webbrowser.open_new(r'/home/ajafari/Deep-Learning/graph.pdf')
 
+with torch.onnx.set_training(model, False):
+    trace, _ = torch.jit.get_trace_graph(model, args=(x,))
+c = make_dot_from_trace(trace)
+print(c.source)
+d =c.render('graph1')
+webbrowser.open_new(r'/home/ajafari/Deep-Learning/graph1.pdf')
