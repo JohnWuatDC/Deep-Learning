@@ -1,13 +1,25 @@
-#----------------------------------------------------------------------------'
-
-# Q1:  plot the performance index with respect to epochs.
-
-
+#----------------------------------------------------------------------------
+# Q1: Modify  the "1_Numpy.py" file and chane the dtype to torch float tensor. 
+# Save the vale of the performance and  plot the followings:
 
 
-#----------------------------------------------------------------------------'
+#----------------------------------------------------------------------------
+# i. Performance index with respect to epochs.
 
-# Q2:  plot each w1 grad and w2 grad? Check your results and see if the plots does make sense
+
+
+#----------------------------------------------------------------------------
+# ii. w1 grad 
+
+
+
+#----------------------------------------------------------------------------
+# ii. w2 grad 
+
+
+
+#----------------------------------------------------------------------------
+# iii. Check your results. Explain each of your plots.
 
 
 
