@@ -1,5 +1,6 @@
 # --------------------------------------------------------------------------
-# Q1:  Rewrite the "2_tensor_pytorch.py" file in our notation and find out 
+# Q1:  Rewrite the "2_tensor_pytorch.py" file in Neural Network Design Bookour
+# Chapter 11 notation (Check the Summary Page) and find out
 # what are the differences. Explain your findings.
 
 
