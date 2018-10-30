@@ -14,14 +14,14 @@ w2 = np.random.randn(S, a)
 
 learning_rate = 1e-6
 #----------------------------------------------------------------------------
-for t in range(500):
+for index in range(500):
 
     h = p.dot(w1)
     h_relu = np.maximum(h, 0)
     a_net = h_relu.dot(w2)
 
     loss = np.square(a_net - t).sum()
-    print(t, loss)
+    print(index, loss)
 
     grad_y_pred = 2.0 * (a_net - t)
     grad_w2 = h_relu.T.dot(grad_y_pred)
