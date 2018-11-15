@@ -5,7 +5,7 @@ c = tf.matmul(a, b)
 # Creates a session with log_device_placement set to True.
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 # Runs the op.
-print sess.run(c)
+print (sess.run(c))
 # ----------------------------------------------------------------------------------
 
 with tf.device('/gpu:0'):
